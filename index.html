@@ -838,6 +838,77 @@ select.input option{background:#111627}
             <tbody id="billBody"></tbody>
           </table>
         </div>
+
+        <!-- 押金管理 -->
+        <div class="card card-pad" style="margin-top:16px">
+          <div class="card-head">
+            <div class="card-title">押金管理</div>
+            <span class="card-sub">缴纳 · 冻结 · 退租抵扣 · 退还 全流程记录</span>
+          </div>
+          <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
+            <div class="kpi k1" style="padding:14px 16px">
+              <div class="kpi-top"><span class="kpi-label">在管押金总额</span></div>
+              <div class="kpi-num" style="font-size:22px">¥<span data-count="186400">0</span></div>
+              <div class="kpi-foot">52 笔生效中</div>
+            </div>
+            <div class="kpi k4" style="padding:14px 16px">
+              <div class="kpi-top"><span class="kpi-label">本月已退还</span></div>
+              <div class="kpi-num" style="font-size:22px">¥<span data-count="7360">0</span></div>
+              <div class="kpi-foot">2 笔 · 核验无损全额退</div>
+            </div>
+            <div class="kpi k3" style="padding:14px 16px">
+              <div class="kpi-top"><span class="kpi-label">待结算（退租中）</span></div>
+              <div class="kpi-num" style="font-size:22px">¥<span data-count="3980">0</span></div>
+              <div class="kpi-foot">李慕白 B-0303 资产核验中</div>
+            </div>
+            <div class="kpi k2" style="padding:14px 16px">
+              <div class="kpi-top"><span class="kpi-label">累计抵扣金额</span></div>
+              <div class="kpi-num" style="font-size:22px">¥<span data-count="2140">0</span></div>
+              <div class="kpi-foot">维修赔付 / 欠费抵扣</div>
+            </div>
+          </div>
+          <table class="table">
+            <thead><tr><th>流水号</th><th>租客 / 房间</th><th>类型</th><th>金额</th><th>时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody id="depositBody"></tbody>
+          </table>
+        </div>
+
+        <!-- 财务统计 -->
+        <div class="card card-pad" style="margin-top:16px">
+          <div class="card-head">
+            <div class="card-title">财务统计</div>
+            <span class="card-sub">空置亏损 · 单房间收益 · 滞纳金测算</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px">
+            <div>
+              <div class="card-title" style="font-size:13px;margin-bottom:10px">单房间收益排行（近 3 个月）</div>
+              <div id="roomProfit"></div>
+            </div>
+            <div>
+              <div class="card-title" style="font-size:13px;margin-bottom:10px">空置亏损估算</div>
+              <div style="background:var(--grad-soft);border:1px solid rgba(139,92,246,.3);border-radius:13px;padding:16px">
+                <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:8px"><span>空置房间</span><b style="color:#fff">11 间</b></div>
+                <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:8px"><span>平均日租金</span><b style="color:#fff">¥142 / 天</b></div>
+                <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:12px"><span>平均空置天数</span><b style="color:#fff">17.5 天</b></div>
+                <div style="border-top:1px dashed rgba(255,255,255,.15);padding-top:12px;display:flex;justify-content:space-between;align-items:center">
+                  <span style="font-size:12.5px;color:var(--muted)">本月空置亏损</span>
+                  <span style="font-size:22px;font-weight:800;color:var(--red)">¥27,405</span>
+                </div>
+              </div>
+              <div class="card-title" style="font-size:13px;margin:14px 0 10px">滞纳金测算</div>
+              <div style="background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:13px;padding:14px">
+                <div class="form-grid-2" style="margin-bottom:10px">
+                  <div class="form-row" style="margin-bottom:0"><label>欠费金额（元）</label><input class="input" id="lateAmt" type="number" value="3280" oninput="calcLate()"></div>
+                  <div class="form-row" style="margin-bottom:0"><label>逾期天数</label><input class="input" id="lateDays" type="number" value="12" oninput="calcLate()"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted)">
+                  <span>按 0.05%/天 自动计算</span>
+                  <span>滞纳金 <b id="lateFee" style="color:var(--amber);font-size:16px">¥19.68</b></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============ IoT 设备 ============ -->
@@ -874,7 +945,11 @@ select.input option{background:#111627}
             <div class="chip">智能门禁</div>
           </div>
           <div class="spacer"></div>
-          <button class="btn btn-primary" onclick="toast('已进入设备绑定向导（原型演示）')">绑定新设备</button>
+          <button class="btn" onclick="openModal('modalUnlockLog')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            开锁记录查询
+          </button>
+          <button class="btn btn-primary" onclick="openModal('modalBindDev')">绑定新设备</button>
         </div>
         <div class="dev-grid" id="devGrid"></div>
 
@@ -1100,6 +1175,121 @@ select.input option{background:#111627}
         <button class="btn" onclick="closeModal('modalMeter')">取消</button>
         <button class="btn btn-primary" onclick="submitForm('modalMeter','抄表数据已录入，费用将计入本月账单')">确认录入</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- 线下缴费登记 -->
+<div class="modal-mask" id="modalOfflinePay">
+  <div class="modal">
+    <div class="modal-head"><h3>登记线下缴费</h3><div class="modal-close" onclick="closeModal('modalOfflinePay')">✕</div></div>
+    <div class="modal-body">
+      <div class="form-grid-2">
+        <div class="form-row"><label>关联账单</label>
+          <select class="input"><option>ZD-202604-1009 · 韩飞 · 租金(合租) ¥2,140</option><option>ZD-202603-0961 · 李慕白 · 维修赔付 ¥480</option></select>
+        </div>
+        <div class="form-row"><label>收款方式</label>
+          <select class="input"><option>现金</option><option>银行转账</option><option>微信转账（对私）</option><option>支付宝（对私）</option></select>
+        </div>
+        <div class="form-row"><label>实收金额（元）</label><input class="input" type="number" value="2140"></div>
+        <div class="form-row"><label>收款日期</label><input class="input" type="date" value="2026-04-02"></div>
+      </div>
+      <div class="form-row"><label>备注 / 凭证号</label><input class="input" placeholder="例如：转账尾号 8891 / 收据编号"></div>
+      <div class="modal-foot">
+        <button class="btn" onclick="closeModal('modalOfflinePay')">取消</button>
+        <button class="btn btn-primary" onclick="submitForm('modalOfflinePay','线下缴费已登记，账单状态更新为已缴费')">确认登记</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 设备绑定向导 -->
+<div class="modal-mask" id="modalBindDev">
+  <div class="modal">
+    <div class="modal-head"><h3>设备绑定向导</h3><div class="modal-close" onclick="closeModal('modalBindDev')">✕</div></div>
+    <div class="modal-body">
+      <div style="display:flex;gap:8px;margin-bottom:18px">
+        <div style="flex:1;text-align:center;font-size:11.5px;color:#fff;font-weight:700;background:var(--grad);border-radius:9px;padding:7px">① 选择设备</div>
+        <div style="flex:1;text-align:center;font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.04);border-radius:9px;padding:7px">② 绑定房间</div>
+        <div style="flex:1;text-align:center;font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.04);border-radius:9px;padding:7px">③ 关联租约</div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>设备类型</label>
+          <select class="input"><option>智能门锁 SL-Pro</option><option>智能电表 DM-3</option><option>智能水表 WM-2</option><option>智能燃气表 GM-1</option><option>智能门禁 GT-1</option></select>
+        </div>
+        <div class="form-row"><label>设备 SN 码</label><input class="input" placeholder="扫码或输入，例如：SLP-2026-0488"></div>
+        <div class="form-row"><label>绑定房间</label>
+          <select class="input"><option>A-1105（空置）</option><option>B-0605（空置）</option><option>B-0303（空置）</option></select>
+        </div>
+        <div class="form-row"><label>绑定模式</label>
+          <select class="input"><option>一对一（房间独占）</option><option>一对多（合租共享）</option></select>
+        </div>
+      </div>
+      <div style="background:var(--grad-soft);border:1px solid rgba(139,92,246,.3);border-radius:13px;padding:13px 16px;font-size:12.5px;color:var(--muted);line-height:1.8">
+        <b style="color:#fff">租约联动规则：</b>设备权限自动跟随租约状态 —— 租约生效时开通租客权限，<b style="color:var(--amber)">租约到期/退租时自动解绑回收权限</b>，临时密码同步失效。
+      </div>
+      <div class="modal-foot">
+        <button class="btn" onclick="closeModal('modalBindDev')">取消</button>
+        <button class="btn btn-primary" onclick="submitForm('modalBindDev','设备绑定成功，已关联房间与租约规则')">完成绑定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 开锁记录查询 -->
+<div class="modal-mask" id="modalUnlockLog">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-head"><h3>开锁记录查询</h3><div class="modal-close" onclick="closeModal('modalUnlockLog')">✕</div></div>
+    <div class="modal-body">
+      <div class="toolbar" style="margin-bottom:12px">
+        <div class="chips">
+          <div class="chip active">全部记录</div>
+          <div class="chip">指纹开锁</div>
+          <div class="chip">临时密码</div>
+          <div class="chip">远程开锁</div>
+          <div class="chip" style="color:var(--red)">异常告警</div>
+        </div>
+      </div>
+      <table class="table">
+        <thead><tr><th>时间</th><th>门锁</th><th>开锁方式</th><th>操作人</th><th>结果</th></tr></thead>
+        <tbody>
+          <tr><td class="t-muted">04-02 14:22</td><td class="t-strong">SL-Pro · A-1201</td><td>指纹开锁</td><td>林晓彤（租客）</td><td><span class="badge st-green"><i></i>正常</span></td></tr>
+          <tr><td class="t-muted">04-02 11:40</td><td class="t-strong">SL-Pro · A-0903</td><td>临时密码（看房）</td><td>运营 · 小李</td><td><span class="badge st-green"><i></i>正常</span></td></tr>
+          <tr><td class="t-muted">04-02 03:17</td><td class="t-strong">SL-Pro · B-0303</td><td>密码尝试 ×5 失败</td><td>未知</td><td><span class="badge st-red"><i class="pulse"></i>异常告警</span></td></tr>
+          <tr><td class="t-muted">04-01 20:05</td><td class="t-strong">SL-Pro · A-1005</td><td>远程开锁</td><td>房东（后台指令）</td><td><span class="badge st-green"><i></i>正常</span></td></tr>
+          <tr><td class="t-muted">04-01 18:30</td><td class="t-strong">SL-Pro · A-1201</td><td>临时密码（保洁）</td><td>保洁阿姨</td><td><span class="badge st-green"><i></i>正常</span></td></tr>
+        </tbody>
+      </table>
+      <div style="background:rgba(255,90,110,.08);border:1px solid rgba(255,90,110,.3);border-radius:13px;padding:12px 16px;font-size:12.5px;color:var(--muted);margin-top:12px">
+        <b style="color:var(--red)">⚠ 异常开锁告警：</b>B-0303（已退租空置房）凌晨 03:17 连续 5 次密码尝试失败，已实时推送房东并生成安防工单。该房间租约已到期，设备权限已自动回收。
+      </div>
+      <div class="modal-foot">
+        <button class="btn" onclick="closeModal('modalUnlockLog')">关闭</button>
+        <button class="btn btn-primary" onclick="toast('开锁记录已导出（原型演示）')">导出记录</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 能耗分析 -->
+<div class="modal-mask" id="modalEnergy">
+  <div class="modal" style="max-width:620px">
+    <div class="modal-head"><h3>能耗分析 · A-1005</h3><div class="modal-close" onclick="closeModal('modalEnergy')">✕</div></div>
+    <div class="modal-body">
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:14px">
+        <div class="kpi k1" style="padding:12px 14px"><div class="kpi-top"><span class="kpi-label">本月用电</span></div><div class="kpi-num" style="font-size:20px">138<small>度</small></div><div class="kpi-foot">环比 +6.2%</div></div>
+        <div class="kpi k4" style="padding:12px 14px"><div class="kpi-top"><span class="kpi-label">本月费用</span></div><div class="kpi-num" style="font-size:20px">¥165.6</div><div class="kpi-foot">单价 1.2 元/度</div></div>
+        <div class="kpi k3" style="padding:12px 14px"><div class="kpi-top"><span class="kpi-label">异常检测</span></div><div class="kpi-num" style="font-size:20px">1<small>处</small></div><div class="kpi-foot">03-28 夜间用电突增</div></div>
+      </div>
+      <div class="card-title" style="font-size:13px;margin-bottom:8px">近 6 个月用电趋势（度）</div>
+      <div id="energyChart" style="display:flex;align-items:flex-end;gap:10px;height:130px;padding:0 4px"></div>
+      <div style="display:flex;justify-content:space-around;font-size:11px;color:var(--muted);margin-top:6px">
+        <span>11月</span><span>12月</span><span>1月</span><span>2月</span><span>3月</span><span>4月</span>
+      </div>
+      <div style="background:rgba(255,171,46,.08);border:1px solid rgba(255,171,46,.3);border-radius:13px;padding:12px 16px;font-size:12.5px;color:var(--muted);margin-top:14px">
+        <b style="color:var(--amber)">💡 能耗异常提示：</b>03-28 凌晨用电较均值高出 210%，疑似大功率电器彻夜运行或线路漏电，建议安排巡检，杜绝偷漏水电与安全隐患。
+      </div>
+      <div class="modal-foot"><button class="btn btn-primary" onclick="closeModal('modalEnergy')">知道了</button></div>
     </div>
   </div>
 </div>
@@ -1418,7 +1608,7 @@ function renderBills(filter='all'){
       ? `<button class="btn btn-sm" onclick="toast('缴费流水详情（原型演示）')">流水</button>`
       : b.st==='overdue'
       ? `<button class="btn btn-sm btn-danger-ghost" onclick="toast('催缴短信 + 小程序推送已发送给 ${b.who.split(' ')[0]}')">一键催缴</button>`
-      : `<button class="btn btn-sm" onclick="toast('已登记线下缴费（原型演示）')">登记缴费</button>`;
+      : `<button class="btn btn-sm" onclick="openModal('modalOfflinePay')">登记缴费</button>`;
     return `<tr>
       <td class="t-strong">${b.id}</td>
       <td>${b.who}</td>
@@ -1450,8 +1640,8 @@ function renderDevices(){
         <div style="display:flex;align-items:center;gap:8px">租客权限 <label class="switch"><input type="checkbox" ${d.online?'checked':''} onchange="toast(this.checked?'已开通租客权限':'已回收租客权限')"><em></em></label></div>
       </div>
       <div class="dev-actions">
-        ${d.type==='lock' ? `<button class="btn btn-sm" onclick="toast('远程开锁指令已下发（原型演示）')">远程开锁</button><button class="btn btn-sm" onclick="toast('临时密码已生成并推送（原型演示）')">临时密码</button>` : ''}
-        ${d.type==='elec'||d.type==='water'||d.type==='gas' ? `<button class="btn btn-sm" onclick="openModal('modalMeter')">立即抄表</button><button class="btn btn-sm" onclick="toast('能耗曲线（原型演示）')">能耗分析</button>` : ''}
+        ${d.type==='lock' ? `<button class="btn btn-sm" onclick="toast('远程开锁指令已下发（原型演示）')">远程开锁</button><button class="btn btn-sm" onclick="toast('临时密码已生成并推送（原型演示）')">临时密码</button><button class="btn btn-sm" onclick="openModal('modalUnlockLog')">开锁记录</button>` : ''}
+        ${d.type==='elec'||d.type==='water'||d.type==='gas' ? `<button class="btn btn-sm" onclick="openModal('modalMeter')">立即抄表</button><button class="btn btn-sm" onclick="openModal('modalEnergy')">能耗分析</button>` : ''}
         ${d.type==='gate' ? `<button class="btn btn-sm" onclick="toast('通行记录（原型演示）')">通行记录</button><button class="btn btn-sm" onclick="toast('远程开门指令已下发（原型演示）')">远程开门</button>` : ''}
       </div>
     </div>`;
@@ -1715,6 +1905,82 @@ function calcMeter(){
   document.getElementById('meterFee').textContent = (used*price).toFixed(2);
 }
 
+/* ---------- 押金流水 ---------- */
+const DEPOSITS = [
+  { id:'YJ-2026-0412', who:'林晓彤 · A-1201', type:'缴纳冻结', amount:3680, time:'2025-06-12', st:'frozen' },
+  { id:'YJ-2026-0398', who:'沈知夏 · C-0201', type:'缴纳冻结', amount:8200, time:'2025-11-03', st:'frozen' },
+  { id:'YJ-2026-0385', who:'周雨桐 · A-0903', type:'缴纳冻结', amount:7800, time:'2026-03-28', st:'frozen' },
+  { id:'YJ-2026-0371', who:'李慕白 · B-0303', type:'退租抵扣', amount:-480, time:'2026-04-01', st:'deduct' },
+  { id:'YJ-2026-0366', who:'王梓萱 · B-0208', type:'全额退还', amount:3680, time:'2026-03-30', st:'refund' },
+  { id:'YJ-2026-0352', who:'刘一诺 · A-0608', type:'全额退还', amount:3680, time:'2026-03-22', st:'refund' },
+];
+const DEP_ST = {
+  frozen:{label:'冻结中', cls:'st-violet'},
+  deduct:{label:'部分抵扣', cls:'st-amber'},
+  refund:{label:'已退还', cls:'st-green'},
+};
+function renderDeposits(){
+  document.getElementById('depositBody').innerHTML = DEPOSITS.map(d=>{
+    const m = DEP_ST[d.st];
+    const act = d.st==='frozen'
+      ? `<button class="btn btn-sm" onclick="toast('押金冻结明细（原型演示）')">明细</button>`
+      : d.st==='deduct'
+      ? `<button class="btn btn-sm btn-primary" onclick="toast('已发起退租结算：抵扣 ¥480 后退还 ¥3,500')">结算退还</button>`
+      : `<button class="btn btn-sm" onclick="toast('退还流水详情（原型演示）')">流水</button>`;
+    return `<tr>
+      <td class="t-strong">${d.id}</td>
+      <td>${d.who}</td>
+      <td><span class="badge ${d.amount<0?'st-amber':'st-blue'}">${d.type}</span></td>
+      <td class="money" style="color:${d.amount<0?'var(--amber)':'#fff'}">${d.amount<0?'-':''}¥${Math.abs(d.amount).toLocaleString()}</td>
+      <td class="t-muted">${d.time}</td>
+      <td><span class="badge ${m.cls}"><i></i>${m.label}</span></td>
+      <td>${act}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ---------- 单房间收益排行 ---------- */
+const ROOM_PROFIT = [
+  { room:'C-0201 · 整租套间', val:24600 },
+  { room:'A-0903 · 整租套间', val:23400 },
+  { room:'B-0501 · 一室一厅', val:15600 },
+  { room:'A-1202 · 双床合租', val:12840 },
+  { room:'A-1201 · 大床房', val:11040 },
+  { room:'B-0702 · 大床房', val:10740 },
+];
+function renderRoomProfit(){
+  const max = ROOM_PROFIT[0].val;
+  document.getElementById('roomProfit').innerHTML = ROOM_PROFIT.map((r,i)=>`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+      <span style="width:18px;height:18px;border-radius:6px;background:${i<3?'var(--grad)':'rgba(255,255,255,.08)'};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0">${i+1}</span>
+      <span style="width:150px;font-size:12px;color:var(--muted);flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.room}</span>
+      <div style="flex:1;height:9px;border-radius:6px;background:rgba(255,255,255,.05);overflow:hidden">
+        <div style="height:100%;width:${(r.val/max*100).toFixed(1)}%;border-radius:6px;background:${i<3?'var(--grad)':'rgba(139,92,246,.35)'}"></div>
+      </div>
+      <span style="width:76px;text-align:right;font-size:12.5px;font-weight:700;flex-shrink:0">¥${r.val.toLocaleString()}</span>
+    </div>`).join('');
+}
+
+/* ---------- 滞纳金测算 ---------- */
+function calcLate(){
+  const amt = parseFloat(document.getElementById('lateAmt').value)||0;
+  const days = parseFloat(document.getElementById('lateDays').value)||0;
+  document.getElementById('lateFee').textContent = '¥' + (amt*0.0005*days).toFixed(2);
+}
+
+/* ---------- 能耗图表 ---------- */
+function renderEnergyChart(){
+  const data = [112, 126, 143, 118, 130, 138];
+  const max = Math.max(...data);
+  document.getElementById('energyChart').innerHTML = data.map((v,i)=>{
+    const abnormal = i===4;
+    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px">
+      <span style="font-size:10.5px;color:${abnormal?'var(--amber)':'var(--muted)'};font-weight:${abnormal?'800':'600'}">${v}${abnormal?' ⚠':''}</span>
+      <div style="width:100%;height:${(v/max*100).toFixed(0)}%;border-radius:8px 8px 4px 4px;background:${abnormal?'linear-gradient(180deg,#ffab2e,#ff8a2e)':'var(--grad)'};opacity:${abnormal?1:.85}"></div>
+    </div>`;
+  }).join('');
+}
+
 document.getElementById('globalSearch').addEventListener('keydown', e=>{
   if(e.key==='Enter' && e.target.value.trim()){
     switchView('rooms');
@@ -1732,6 +1998,9 @@ renderRooms();
 renderTenants();
 renderLeases();
 renderBills();
+renderDeposits();
+renderRoomProfit();
+renderEnergyChart();
 renderDevices();
 renderKanban();
 renderMessages();
