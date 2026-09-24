@@ -6,6 +6,7 @@ Page({
     brand: config.brand,
     item: null,
     bodyParts: [],
+    inlineImages: [],
     loading: true,
     failed: false,
     canOpenChannels: false
@@ -32,7 +33,10 @@ Page({
           .split('\n')
           .map(s => s.trim())
           .filter(Boolean)
-        this.setData({ item, bodyParts, loading: false })
+        // 封面若取自第一张配图，正文里就不再重复展示
+        const images = item.images || []
+        const inlineImages = (item.cover && images[0] === item.cover) ? images.slice(1) : images
+        this.setData({ item, bodyParts, inlineImages, loading: false })
         wx.setNavigationBarTitle({ title: item.type === 'video' ? '视频详情' : '图文详情' })
       })
       .catch(err => {

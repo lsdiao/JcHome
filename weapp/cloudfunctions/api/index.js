@@ -355,13 +355,19 @@ function publicContent(c) {
 async function contentList(openid, event) {
   const admin = event.admin ? await isAdmin(openid) : false
   const where = admin ? {} : { status: _.neq('off') }
+  // 单字段排序 + 内存排序，避免依赖组合索引
   const res = await db.collection(C.contents)
     .where(where)
-    .orderBy('pinned', 'desc')
     .orderBy('sort', 'asc')
     .limit(100)
     .get()
-  return res.data.map(publicContent)
+  const rows = res.data.slice().sort((a, b) => {
+    const pa = a.pinned ? 0 : 1
+    const pb = b.pinned ? 0 : 1
+    if (pa !== pb) return pa - pb
+    return (a.sort || 0) - (b.sort || 0)
+  })
+  return rows.map(publicContent)
 }
 
 async function contentSave(openid, event) {

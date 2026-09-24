@@ -24,7 +24,7 @@
           <image src="{{item.cover}}" mode="aspectFill" lazy-load="{{true}}"></image>
           <view class="tdim"></view>
 
-          <view class="pin-tag" wx:if="{{item.pinned}}">置顶介绍</view>
+          <view class="pin-tag" wx:if="{{item.pinned}}">置顶</view>
 
           <!-- 视频：播放按钮 + 时长 -->
           <block wx:if="{{item.type === 'video'}}">

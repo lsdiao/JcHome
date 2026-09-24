@@ -93,6 +93,46 @@ function copy(text, tip) {
   })
 }
 
+/** 上传单个文件到云存储，resolve fileID */
+function uploadOne(filePath) {
+  const m = /\.(\w+)$/.exec(filePath)
+  const ext = m ? m[1] : 'png'
+  const cloudPath = 'uploads/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext
+  return new Promise((resolve, reject) => {
+    wx.cloud.uploadFile({
+      cloudPath,
+      filePath,
+      success: res => resolve(res.fileID),
+      fail: err => {
+        console.error('[api] 上传失败：', err)
+        reject(new Error('图片上传失败，请检查云存储权限'))
+      }
+    })
+  })
+}
+
+/** 选择图片并上传到云存储，resolve fileID 数组 */
+function chooseImages(count) {
+  return new Promise((resolve, reject) => {
+    wx.chooseMedia({
+      count: count || 9,
+      mediaType: ['image'],
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        const files = (res.tempFiles || []).map(f => f.tempFilePath)
+        if (!files.length) { resolve([]); return }
+        Promise.all(files.map(uploadOne)).then(resolve).catch(reject)
+      },
+      fail: err => {
+        // 用户取消不算错误
+        if (err && err.errMsg && err.errMsg.indexOf('cancel') >= 0) { resolve(null); return }
+        reject(err)
+      }
+    })
+  })
+}
+
 /** 需要管理员权限时统一拦截 */
 function needAdmin(isAdmin) {
   if (isAdmin) return true
@@ -129,6 +169,8 @@ module.exports = {
   level,
   toast,
   copy,
+  uploadOne,
+  chooseImages,
   needAdmin,
   fmtTime,
   fmtDate,

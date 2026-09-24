@@ -14,7 +14,17 @@ Page({
 
   onShow() {
     api.getMe()
-      .then(me => this.setData({ openid: me.openid }))
+      .then(me => {
+        // 非管理员不放行（真正的权限校验在云函数侧）
+        if (!me.isAdmin) {
+          api.toast('仅管理员可进入')
+          wx.navigateBack({
+            fail: () => wx.switchTab({ url: '/pages/mine/mine' })
+          })
+          return
+        }
+        this.setData({ openid: me.openid })
+      })
       .catch(() => {})
   },
 

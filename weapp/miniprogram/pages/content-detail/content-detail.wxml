@@ -78,7 +78,7 @@
 
         <image
           class="inline-img"
-          wx:for="{{item.images}}"
+          wx:for="{{inlineImages}}"
           wx:for-item="img"
           wx:key="index"
           src="{{img}}"
