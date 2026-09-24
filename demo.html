@@ -23,9 +23,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
 .topbar{display:flex;align-items:center;gap:26px}
 .tb-brand{font-family:var(--serif);font-size:15px;letter-spacing:3px;color:var(--gold-2)}
 .tb-brand span{font-size:9px;letter-spacing:3px;color:var(--dim);margin-left:10px}
-.seg{display:flex;background:#12121a;border:1px solid var(--line);border-radius:22px;padding:3px}
-.seg-btn{border:none;background:none;color:var(--sub);font-size:13px;padding:8px 26px;border-radius:18px;cursor:pointer;letter-spacing:2px}
-.seg-btn.on{background:var(--gold-grad);color:#231a0c;font-weight:800}
+
 
 #memberView{display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap}
 
@@ -285,42 +283,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
   font-size:12.5px;padding:12px 22px;border-radius:10px;z-index:90;display:none;max-width:72%;text-align:center;line-height:1.7;letter-spacing:1px}
 .toast.show{display:block;animation:rise .2s ease}
 
-/* ================= 管理端 ================= */
-#adminView{display:none;width:min(1180px,97vw)}
-#adminView.show{display:block}
-.admin{height:min(850px,88vh);background:#101017;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex}
-.aside{width:200px;border-right:1px solid var(--line);background:#0d0d13;padding:24px 0;flex-shrink:0;display:flex;flex-direction:column}
-.a-brand{padding:0 22px 20px;border-bottom:1px solid var(--line);margin-bottom:14px}
-.a-brand b{font-family:var(--serif);font-size:16px;letter-spacing:3px;display:block}
-.a-brand span{font-size:9px;letter-spacing:2.5px;color:var(--gold);display:block;margin-top:5px}
-.anav{display:flex;align-items:center;gap:11px;padding:13px 22px;font-size:13px;color:var(--sub);cursor:pointer;border-left:2px solid transparent;letter-spacing:1px}
-.anav svg{width:16px;height:16px;flex-shrink:0}
-.anav.on{color:var(--gold-2);border-left-color:var(--gold);background:rgba(201,162,107,.07)}
-.anav:hover:not(.on){color:#b9b3a6}
-.amain{flex:1;overflow-y:auto;padding:26px 30px;scrollbar-width:none}
-.amain::-webkit-scrollbar{display:none}
-.asection{display:none}
-.asection.on{display:block;animation:fadein .25s ease}
-.asection h2{font-family:var(--serif);font-size:19px;letter-spacing:2px;margin-bottom:4px}
-.asection .asub{font-size:12px;color:var(--sub);margin-bottom:22px;letter-spacing:.5px}
-.apanel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:18px}
-.apanel .ap-title{font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.apanel .ap-title::before{content:"";width:3px;height:13px;background:var(--gold-grad);border-radius:2px}
-.frow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.ainput,.aselect{border:1px solid rgba(235,225,205,.16);background:#0d0d13;border-radius:9px;padding:10px 12px;font-size:13px;color:var(--ink);outline:none}
+/* ================= 小程序内管理端 ================= */
+.adm-body{padding:14px 14px 30px}
+.adm-hero{margin:2px 2px 14px;padding:20px 18px;border-radius:16px;position:relative;overflow:hidden;
+  background:linear-gradient(130deg,#2b2416 0%,#191510 55%,#100e0a 100%);border:1px solid rgba(201,162,107,.4)}
+.adm-hero::before{content:"";position:absolute;right:-56px;top:-56px;width:170px;height:170px;border-radius:50%;
+  background:radial-gradient(circle,rgba(231,210,164,.15),transparent 65%)}
+.adm-hero .k{font-size:9px;letter-spacing:4px;color:var(--gold);margin-bottom:9px}
+.adm-hero h3{font-family:var(--serif);font-size:19px;letter-spacing:3px;color:var(--gold-2)}
+.adm-hero p{font-size:11px;color:var(--sub);margin-top:8px;line-height:1.8;letter-spacing:.5px}
+.adm-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.adm-cell{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px 14px 15px;cursor:pointer;transition:transform .15s}
+.adm-cell:active{transform:scale(.96)}
+.adm-cell svg{width:22px;height:22px;color:var(--gold)}
+.adm-cell b{display:block;font-size:13.5px;margin:11px 0 5px;letter-spacing:1px}
+.adm-cell span{font-size:10.5px;color:var(--dim);letter-spacing:.5px}
+.adm-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 14px;margin-bottom:12px}
+.adm-card .ap-title{font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:13px;display:flex;align-items:center;gap:8px}
+.adm-card .ap-title::before{content:"";width:3px;height:13px;background:var(--gold-grad);border-radius:2px}
+.adm-sec{font-size:12px;font-weight:700;letter-spacing:1.5px;margin:18px 2px 10px;display:flex;align-items:center;gap:8px;color:#c9c4b8}
+.adm-sec::before{content:"";width:3px;height:12px;background:var(--gold-grad);border-radius:2px}
+.fcol{display:flex;flex-direction:column;gap:9px}
+.fcol .ainput,.fcol .aselect,.fcol .abtn{width:100%}
+.ainput,.aselect{border:1px solid rgba(235,225,205,.16);background:#0d0d13;border-radius:9px;padding:11px 12px;font-size:13px;color:var(--ink);outline:none}
 .ainput:focus,.aselect:focus{border-color:var(--gold)}
 .ainput::placeholder{color:var(--dim)}
 .aselect{cursor:pointer}
-.abtn{border:none;background:var(--gold-grad);color:#231a0c;border-radius:9px;padding:10px 22px;font-size:13px;font-weight:800;letter-spacing:1px;cursor:pointer}
+input[type="date"].ainput{color-scheme:dark}
+.abtn{border:none;background:var(--gold-grad);color:#231a0c;border-radius:9px;padding:11px 22px;font-size:13px;font-weight:800;letter-spacing:2px;cursor:pointer}
 .abtn:active{filter:brightness(.92)}
-.abtn-ghost{border:1px solid var(--line);background:none;color:var(--sub);border-radius:8px;padding:6px 13px;font-size:12px;cursor:pointer;letter-spacing:.5px}
-.abtn-ghost:hover{color:var(--gold-2);border-color:rgba(201,162,107,.4)}
-.abtn-danger{border:1px solid rgba(224,104,79,.4);background:none;color:#d98a77;border-radius:8px;padding:6px 13px;font-size:12px;cursor:pointer}
-.abtn-danger:hover{background:rgba(224,104,79,.1)}
-.atable{width:100%;border-collapse:collapse;font-size:12.5px}
-.atable th{text-align:left;font-size:10.5px;letter-spacing:2px;color:var(--dim);font-weight:400;padding:10px 10px;border-bottom:1px solid var(--line)}
-.atable td{padding:12px 10px;border-bottom:1px solid rgba(235,225,205,.05);vertical-align:middle}
-.atable tr:last-child td{border-bottom:none}
+.abtn-ghost{border:1px solid var(--line);background:none;color:var(--sub);border-radius:8px;padding:7px 13px;font-size:12px;cursor:pointer;letter-spacing:.5px}
+.abtn-ghost:active{color:var(--gold-2);border-color:rgba(201,162,107,.4)}
+.abtn-danger{border:1px solid rgba(224,104,79,.4);background:none;color:#d98a77;border-radius:8px;padding:7px 13px;font-size:12px;cursor:pointer}
+.abtn-danger:active{background:rgba(224,104,79,.1)}
 .mono{font-family:ui-monospace,Menlo,monospace;letter-spacing:1.5px;color:var(--gold-2)}
 .stag{font-size:10px;padding:2.5px 9px;border-radius:4px;font-weight:700;letter-spacing:1px;white-space:nowrap}
 .stag.unused{color:var(--gold-2);border:1px solid rgba(201,162,107,.5)}
@@ -331,37 +326,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
 .trace{font-size:11px;color:var(--sub);line-height:1.7}
 .trace b{color:#b9b3a6;font-weight:600}
 .plogo{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2b2416,#16130d);border:1px solid rgba(201,162,107,.45);
-  display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:800;color:var(--gold-2)}
-.price-input{width:74px;border:1px solid rgba(235,225,205,.16);background:#0d0d13;border-radius:8px;padding:8px 10px;font-size:13px;color:var(--gold-2);outline:none;font-family:ui-monospace,Menlo,monospace;text-align:right}
+  display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:800;color:var(--gold-2);flex-shrink:0}
+.ck-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ck-code{font-size:15.5px}
+.ck-meta{font-size:11px;color:var(--sub);margin-top:8px;letter-spacing:.5px}
+.ck-ops{display:flex;gap:8px;margin-top:12px;border-top:1px solid var(--line);padding-top:11px}
+.ck-ops button{flex:1}
+.price-input{width:76px;border:1px solid rgba(235,225,205,.16);background:#0d0d13;border-radius:8px;padding:8px 10px;font-size:13px;color:var(--gold-2);outline:none;font-family:ui-monospace,Menlo,monospace;text-align:right}
 .price-input:focus{border-color:var(--gold)}
-.pcell{display:flex;align-items:center;gap:10px}
-.pcell img{width:42px;height:42px;border-radius:8px;object-fit:cover;background:#222}
-.pcell .pn{font-weight:600;font-size:12.5px}
+.price-input:disabled{opacity:.35}
+.pcell{display:flex;align-items:center;gap:10px;min-width:0}
+.pcell img{width:42px;height:42px;border-radius:8px;object-fit:cover;background:#222;flex-shrink:0}
+.pcell .pn{font-weight:600;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pcell .ps{font-size:10.5px;color:var(--dim);font-family:ui-monospace,Menlo,monospace;margin-top:2px}
+.prow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0;border-top:1px dashed rgba(235,225,205,.09)}
+.prow label{font-size:11.5px;color:var(--sub);letter-spacing:1px}
 .mini-bar{height:5px;border-radius:3px;background:rgba(235,225,205,.08);overflow:hidden;margin-top:5px}
 .mini-bar i{display:block;height:100%;background:var(--gold-grad)}
-.va-item{border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-bottom:12px;background:var(--card)}
-.va-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
-.va-head b{font-size:13.5px;font-family:var(--serif);letter-spacing:.5px}
+.va-item{border:1px solid var(--line);border-radius:12px;padding:15px 14px;margin-bottom:12px;background:var(--card)}
+.va-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:11px}
+.va-head b{font-size:13.5px;font-family:var(--serif);letter-spacing:.5px;line-height:1.55}
+.va-ops{display:flex;gap:7px;align-items:center;flex-shrink:0}
 .va-opts{font-size:11.5px;color:var(--sub)}
-.va-opts .vo{margin-bottom:7px}
-.va-opts .vo span{display:inline-block;min-width:150px}
+.va-opts .vo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:9px}
+.va-opts .vo span{flex:1;min-width:0;font-size:12px;color:#b9b3a6}
 .va-opts .vo b{color:var(--gold-2);font-family:ui-monospace,Menlo,monospace;font-weight:600}
+.va-opts .vo .mini-bar{flex-basis:100%;margin-top:0}
 textarea.ainput{width:100%;min-height:64px;resize:vertical;font-family:inherit;line-height:1.7}
-.opt-inputs .ainput{margin-bottom:8px;width:100%}
-.admin-toast{position:fixed;left:50%;top:40px;transform:translateX(-50%);background:rgba(20,20,26,.95);border:1px solid rgba(201,162,107,.4);color:var(--gold-2);
-  font-size:13px;padding:11px 24px;border-radius:10px;z-index:200;display:none;letter-spacing:1px}
-.admin-toast.show{display:block;animation:rise .2s ease}
+.adm-tag{font-size:8.5px;color:#231a0c;background:var(--gold-grad);border-radius:3px;padding:1.5px 6px;font-weight:800;letter-spacing:1px;margin-left:7px;vertical-align:1px}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="tb-brand">臻瓷汇<span>TILE · CLUB DEMO</span></div>
-  <div class="seg">
-    <button class="seg-btn on" data-v="member">会员端</button>
-    <button class="seg-btn" data-v="admin">管理端</button>
-  </div>
 </div>
 
 <!-- ================= 会员端 ================= -->
@@ -369,8 +367,8 @@ textarea.ainput{width:100%;min-height:64px;resize:vertical;font-family:inherit;l
 <div class="console">
   <div class="kicker">INTERACTIVE DEMO</div>
   <h1>臻瓷汇</h1>
-  <div class="desc">瓷砖授权经销商的会员制小程序原型，数据均为演示数据。顶部可切换到管理端后台。</div>
-  <div class="step">① 默认是<b>游客</b>：可浏览首页视频和投票，产品库与查价被锁定。<br>② 进入「我的」，输入任一邀请码开通会员。<br>③ 三种等级三档价格，可重置后换码对比。</div>
+  <div class="desc">瓷砖授权经销商的会员制小程序原型，数据均为演示数据。会员端与管理端都集成在同一个小程序内。</div>
+  <div class="step">① 默认是<b>游客</b>：可浏览首页视频和投票，产品库与查价被锁定。<br>② 进入「我的」，输入任一邀请码开通会员。<br>③ 「我的」页有<b>管理后台</b>入口：邀请码、关联小程序、价格、投票都在小程序内管理（正式版仅管理员可见）。</div>
   <div class="code-row"><div class="code">PT8A0001</div><span class="lv l1">普通会员</span><button class="copy-btn" data-c="PT8A0001">复制</button></div>
   <div class="code-row"><div class="code">GJ8B0002</div><span class="lv">高级会员</span><button class="copy-btn" data-c="GJ8B0002">复制</button></div>
   <div class="code-row"><div class="code">HX8C0003</div><span class="lv l3">核心会员</span><button class="copy-btn" data-c="HX8C0003">复制</button></div>
@@ -408,6 +406,85 @@ textarea.ainput{width:100%;min-height:64px;resize:vertical;font-family:inherit;l
     <div class="page" id="pg-vote"><div class="vote-list" id="voteList"></div></div>
     <div class="page pushed" id="pg-voteDetail"><div id="voteDetailInner"></div></div>
     <div class="page" id="pg-mine"><div id="mineInner"></div></div>
+
+    <!-- 管理端（小程序内页面） -->
+    <div class="page pushed" id="pg-admin">
+      <div class="adm-body">
+        <div class="adm-hero">
+          <div class="k">ADMIN CONSOLE</div>
+          <h3>管理后台</h3>
+          <p>邀请码 · 关联小程序 · 价格 · 投票<br>正式版仅管理员账号可见此入口</p>
+        </div>
+        <div class="adm-grid">
+          <div class="adm-cell" data-adm="codes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 10h6M7 14h4" stroke-linecap="round"/></svg><b>邀请码管理</b><span>生成 · 追溯 · 作废</span></div>
+          <div class="adm-cell" data-adm="apps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M17 13.5v7M13.5 17h7" stroke-linecap="round"/></svg><b>关联小程序</b><span>增减品牌直达</span></div>
+          <div class="adm-cell" data-adm="prices"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.6 13.4L12 4.8A2 2 0 0 0 10.6 4H5a1 1 0 0 0-1 1v5.6c0 .5.2 1 .6 1.4l8.6 8.6a2 2 0 0 0 2.8 0l4.6-4.6a2 2 0 0 0 0-2.8z"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/></svg><b>价格设置</b><span>三档会员价 · 上下架</span></div>
+          <div class="adm-cell" data-adm="votes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8.5 12l2.4 2.4L15.7 9.5" stroke-linecap="round" stroke-linejoin="round"/></svg><b>投票管理</b><span>发起 · 截止 · 结果</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page pushed" id="pg-adm-codes">
+      <div class="adm-body">
+        <div class="adm-card">
+          <div class="ap-title">生成邀请码 · 一码一会员</div>
+          <div class="fcol">
+            <select class="aselect" id="ncLevel">
+              <option value="0">普通会员</option><option value="1" selected>高级会员</option><option value="2">核心会员</option>
+            </select>
+            <input class="ainput" id="ncRemark" placeholder="备注：发给谁（如 佛山陈总）">
+            <button class="abtn" id="ncBtn">生成邀请码</button>
+          </div>
+        </div>
+        <div class="adm-sec">邀请码列表 · 使用追溯</div>
+        <div id="codeRows"></div>
+      </div>
+    </div>
+
+    <div class="page pushed" id="pg-adm-apps">
+      <div class="adm-body">
+        <div class="adm-card">
+          <div class="ap-title">新增关联小程序</div>
+          <div class="fcol">
+            <input class="ainput" id="naName" placeholder="小程序名称（如 马可波罗瓷砖官方）">
+            <input class="ainput" id="naAppid" placeholder="AppID（选填，留空自动生成演示值）">
+            <button class="abtn" id="naBtn">添加关联</button>
+          </div>
+        </div>
+        <div class="adm-sec">已关联小程序 · 会员端品牌直达同步</div>
+        <div id="appRows"></div>
+      </div>
+    </div>
+
+    <div class="page pushed" id="pg-adm-prices">
+      <div class="adm-body">
+        <div class="adm-card">
+          <div class="ap-title">产品价格表 · 三档会员价</div>
+          <div style="font-size:11px;color:var(--sub);line-height:1.7;margin-bottom:12px">修改价格后点击保存，会员端实时生效</div>
+          <button class="abtn" id="savePrices" style="width:100%">保存全部价格</button>
+        </div>
+        <div id="priceRows"></div>
+      </div>
+    </div>
+
+    <div class="page pushed" id="pg-adm-votes">
+      <div class="adm-body">
+        <div class="adm-card">
+          <div class="ap-title">发起投票</div>
+          <div class="fcol">
+            <input class="ainput" id="nvTitle" placeholder="投票标题（如 新品「柔光微水泥砖」是否上架？）">
+            <input class="ainput" id="nvDeadline" type="date">
+            <textarea class="ainput" id="nvIntro" placeholder="新品介绍（规格、卖点、预计价位）"></textarea>
+            <input class="ainput" id="nvOpt0" placeholder="选项 1（必填）">
+            <input class="ainput" id="nvOpt1" placeholder="选项 2（必填）">
+            <input class="ainput" id="nvOpt2" placeholder="选项 3（选填）">
+            <button class="abtn" id="nvBtn">发布投票</button>
+          </div>
+        </div>
+        <div class="adm-sec">投票列表 · 结果汇总</div>
+        <div id="voteAdminList"></div>
+      </div>
+    </div>
   </div>
 
   <div class="tabbar" id="tabbar">
@@ -437,103 +514,6 @@ textarea.ainput{width:100%;min-height:64px;resize:vertical;font-family:inherit;l
   <div class="toast" id="toast"></div>
 </div></div>
 </div>
-
-<!-- ================= 管理端 ================= -->
-<div id="adminView">
-  <div class="admin">
-    <div class="aside">
-      <div class="a-brand"><b>臻瓷汇</b><span>ADMIN CONSOLE</span></div>
-      <div class="anav on" data-sec="codes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 10h6M7 14h4" stroke-linecap="round"/></svg>邀请码管理</div>
-      <div class="anav" data-sec="apps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M17 13.5v7M13.5 17h7" stroke-linecap="round"/></svg>关联小程序</div>
-      <div class="anav" data-sec="prices"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.6 13.4L12 4.8A2 2 0 0 0 10.6 4H5a1 1 0 0 0-1 1v5.6c0 .5.2 1 .6 1.4l8.6 8.6a2 2 0 0 0 2.8 0l4.6-4.6a2 2 0 0 0 0-2.8z"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/></svg>价格设置</div>
-      <div class="anav" data-sec="votes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8.5 12l2.4 2.4L15.7 9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>投票管理</div>
-    </div>
-    <div class="amain">
-
-      <!-- 邀请码管理 -->
-      <div class="asection on" id="sec-codes">
-        <h2>邀请码管理</h2>
-        <div class="asub">一码一会员 · 每个邀请码仅可成功开通一次，全程可追溯</div>
-        <div class="apanel">
-          <div class="ap-title">生成邀请码</div>
-          <div class="frow">
-            <select class="aselect" id="ncLevel">
-              <option value="0">普通会员</option><option value="1" selected>高级会员</option><option value="2">核心会员</option>
-            </select>
-            <input class="ainput" id="ncRemark" placeholder="备注：发给谁（如 佛山陈总）" style="width:240px">
-            <button class="abtn" id="ncBtn">生成邀请码</button>
-          </div>
-        </div>
-        <div class="apanel">
-          <div class="ap-title">邀请码列表 · 使用追溯</div>
-          <table class="atable"><thead><tr>
-            <th>邀请码</th><th>绑定等级</th><th>备注（发给谁）</th><th>状态</th><th>使用追溯</th><th>操作</th>
-          </tr></thead><tbody id="codeRows"></tbody></table>
-        </div>
-      </div>
-
-      <!-- 关联小程序 -->
-      <div class="asection" id="sec-apps">
-        <h2>关联小程序</h2>
-        <div class="asub">管理会员端「品牌直达」展示的授权品牌官方小程序</div>
-        <div class="apanel">
-          <div class="ap-title">新增关联小程序</div>
-          <div class="frow">
-            <input class="ainput" id="naName" placeholder="小程序名称（如 马可波罗瓷砖官方）" style="width:230px">
-            <input class="ainput" id="naAppid" placeholder="AppID（选填，留空自动生成演示值）" style="width:250px">
-            <button class="abtn" id="naBtn">添加关联</button>
-          </div>
-        </div>
-        <div class="apanel">
-          <div class="ap-title">已关联小程序</div>
-          <table class="atable"><thead><tr>
-            <th>品牌</th><th>小程序名称</th><th>AppID</th><th>会员端展示</th><th>操作</th>
-          </tr></thead><tbody id="appRows"></tbody></table>
-        </div>
-      </div>
-
-      <!-- 价格设置 -->
-      <div class="asection" id="sec-prices">
-        <h2>价格设置</h2>
-        <div class="asub">每个产品三档会员价（元/片）· 修改后会员端实时生效</div>
-        <div class="apanel">
-          <div class="ap-title">产品价格表</div>
-          <table class="atable"><thead><tr>
-            <th>产品</th><th>普通会员价</th><th>高级会员价</th><th>核心会员价</th><th>状态</th><th>操作</th>
-          </tr></thead><tbody id="priceRows"></tbody></table>
-          <div style="margin-top:16px;text-align:right"><button class="abtn" id="savePrices">保存全部价格</button></div>
-        </div>
-      </div>
-
-      <!-- 投票管理 -->
-      <div class="asection" id="sec-votes">
-        <h2>投票管理</h2>
-        <div class="asub">发起新品投票 · 发布后会员端立即可见</div>
-        <div class="apanel">
-          <div class="ap-title">发起投票</div>
-          <div class="frow" style="margin-bottom:10px">
-            <input class="ainput" id="nvTitle" placeholder="投票标题（如 新品「柔光微水泥砖」是否上架？）" style="flex:1;min-width:280px">
-            <input class="ainput" id="nvDeadline" type="date">
-          </div>
-          <div class="frow" style="margin-bottom:10px"><textarea class="ainput" id="nvIntro" placeholder="新品介绍（规格、卖点、预计价位）"></textarea></div>
-          <div class="opt-inputs" style="max-width:340px;margin-bottom:12px">
-            <input class="ainput" id="nvOpt0" placeholder="选项 1（必填）">
-            <input class="ainput" id="nvOpt1" placeholder="选项 2（必填）">
-            <input class="ainput" id="nvOpt2" placeholder="选项 3（选填）">
-          </div>
-          <button class="abtn" id="nvBtn">发布投票</button>
-        </div>
-        <div class="apanel">
-          <div class="ap-title">投票列表 · 结果汇总</div>
-          <div id="voteAdminList"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="admin-toast" id="atoast"></div>
 
 <script>
 /* ================= 数据 ================= */
@@ -605,32 +585,26 @@ const VOTE_IMG_POOL = [
 let products, votes, miniApps, codes;
 function snapshot(){ products=JSON.parse(JSON.stringify(productsInit)); votes=JSON.parse(JSON.stringify(votesInit)); miniApps=[...miniAppsInit.map(x=>({...x}))]; codes=JSON.parse(JSON.stringify(codesInit)); }
 snapshot();
-let state = { member:null, voted:{}, selOpt:{}, tab:"home", pushed:null };
+let state = { member:null, voted:{}, selOpt:{}, tab:"home" };
 let playerTimer=null;
 
 /* ================= 工具 ================= */
 const $ = id => document.getElementById(id);
 function toast(msg, ms=1800){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),ms); }
-function atoast(msg){ const t=$("atoast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),2000); }
+function atoast(msg, ms){ toast(msg, ms||2000); }
 function openSheet(html){ $("sheetBox").innerHTML=html; $("sheetMask").classList.add("show"); }
 function openDlg(html){ $("dlgBox").innerHTML=html; $("dlgMask").classList.add("show"); }
 $("sheetMask").addEventListener("click",e=>{ if(e.target.id==="sheetMask") $("sheetMask").classList.remove("show"); });
 $("dlgMask").addEventListener("click",e=>{ if(e.target.id==="dlgMask") $("dlgMask").classList.remove("show"); });
 function nowStr(){ const d=new Date(); const p=n=>String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`; }
 
-/* ================= 会员端 / 管理端切换 ================= */
-document.querySelectorAll(".seg-btn").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".seg-btn").forEach(x=>x.classList.toggle("on",x===b));
-  const admin=b.dataset.v==="admin";
-  $("adminView").classList.toggle("show",admin);
-  $("memberView").style.display=admin?"none":"flex";
-  if(admin) renderAdmin();
-}));
-
-/* ================= 导航 ================= */
+/* ================= 导航（页面栈） ================= */
 const TITLES = {home:"臻瓷汇",products:"产品库",price:"价格查询",vote:"新品投票",mine:"我的"};
+let stack=[];
 function go(tab){
-  state.tab=tab; state.pushed=null;
+  state.tab=tab;
+  stack.forEach(s=>$(s.id).classList.remove("active"));
+  stack=[];
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.tab===tab));
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   $("pg-"+tab).classList.add("active");
@@ -638,13 +612,17 @@ function go(tab){
   $("navBack").style.display="none";
 }
 function push(id,title){
-  state.pushed=id;
+  stack.push({id,title});
   $(id).classList.add("active"); $(id).scrollTop=0;
   $("navTitle").textContent=title;
   $("navBack").style.display="flex";
 }
 $("navBack").addEventListener("click",()=>{
-  if(state.pushed){ $(state.pushed).classList.remove("active"); state.pushed=null; $("navTitle").textContent=TITLES[state.tab]; $("navBack").style.display="none"; }
+  const cur=stack.pop();
+  if(!cur) return;
+  $(cur.id).classList.remove("active");
+  if(stack.length){ $("navTitle").textContent=stack[stack.length-1].title; }
+  else{ $("navTitle").textContent=TITLES[state.tab]; $("navBack").style.display="none"; }
 });
 $("tabbar").addEventListener("click",e=>{ const t=e.target.closest(".tab"); if(t) go(t.dataset.tab); });
 
@@ -878,10 +856,12 @@ function renderMine(){
       <div class="tip">没有邀请码？请向管理员索取</div>
     </div>`}
     <div class="menu">
+      <div class="mi" id="miAdmin"><span>管理后台<span class="adm-tag">ADMIN</span></span><span class="arrow">›</span></div>
       <div class="mi" id="miKefu"><span>联系客服</span><span class="arrow">›</span></div>
       <div class="mi" id="miAbout"><span>关于小程序</span><span class="arrow">›</span></div>
     </div>
     <div class="foot">臻瓷汇 · 邀请制会员服务</div>`;
+  $("miAdmin").addEventListener("click",()=>{ renderAdmin(); push("pg-admin","管理后台"); });
   if(!m){
     $("actBtn").addEventListener("click",()=>{
       const code=$("codeInput").value.trim().toUpperCase();
@@ -908,25 +888,27 @@ function renderMine(){
     <button class="btn-primary" onclick="document.getElementById('sheetMask').classList.remove('show')">关闭</button>`));
 }
 
-/* ================= 管理端 ================= */
-document.querySelectorAll(".anav").forEach(n=>n.addEventListener("click",()=>{
-  document.querySelectorAll(".anav").forEach(x=>x.classList.toggle("on",x===n));
-  document.querySelectorAll(".asection").forEach(s=>s.classList.toggle("on",s.id==="sec-"+n.dataset.sec));
+/* ================= 管理端（小程序内） ================= */
+const ADM_PAGES={codes:["pg-adm-codes","邀请码管理"],apps:["pg-adm-apps","关联小程序"],prices:["pg-adm-prices","价格设置"],votes:["pg-adm-votes","投票管理"]};
+document.querySelectorAll(".adm-cell").forEach(el=>el.addEventListener("click",()=>{
+  const p=ADM_PAGES[el.dataset.adm];
+  renderAdmin();
+  push(p[0],p[1]);
 }));
 function renderAdmin(){ renderCodeRows(); renderAppRows(); renderPriceRows(); renderVoteAdmin(); }
 
 /* ---- 邀请码 ---- */
 function renderCodeRows(){
-  $("codeRows").innerHTML = codes.map((c,i)=>`<tr>
-    <td class="mono">${c.code}</td>
-    <td>${LEVELS[c.level]}</td>
-    <td style="color:var(--sub)">${c.remark||"—"}</td>
-    <td><span class="stag ${c.status}">${c.status==="unused"?"未使用":c.status==="used"?"已使用":"已作废"}</span></td>
-    <td class="trace">${c.status==="used"?`<b>${c.usedBy}</b> · ${c.usedAt}`:`生成于 ${c.createdAt}`}</td>
-    <td style="white-space:nowrap">
-      <button class="abtn-ghost" data-copy="${c.code}">复制</button>
-      ${c.status==="unused"?`<button class="abtn-danger" data-void="${i}">作废</button>`:""}
-    </td></tr>`).join("");
+  $("codeRows").innerHTML = codes.map((c,i)=>`
+    <div class="adm-card">
+      <div class="ck-top"><span class="mono ck-code">${c.code}</span><span class="stag ${c.status}">${c.status==="unused"?"未使用":c.status==="used"?"已使用":"已作废"}</span></div>
+      <div class="ck-meta">${LEVELS[c.level]} · ${c.remark||"无备注"}</div>
+      <div class="trace" style="margin-top:7px">${c.status==="used"?`<b>${c.usedBy}</b> 于 ${c.usedAt} 开通`:`生成于 ${c.createdAt} · 待使用`}</div>
+      <div class="ck-ops">
+        <button class="abtn-ghost" data-copy="${c.code}">复制</button>
+        ${c.status==="unused"?`<button class="abtn-danger" data-void="${i}">作废</button>`:""}
+      </div>
+    </div>`).join("");
   $("codeRows").querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{ navigator.clipboard?.writeText(b.dataset.copy); atoast("已复制："+b.dataset.copy); }));
   $("codeRows").querySelectorAll("[data-void]").forEach(b=>b.addEventListener("click",()=>{ codes[+b.dataset.void].status="void"; renderCodeRows(); atoast("邀请码已作废"); }));
 }
@@ -941,12 +923,11 @@ $("ncBtn").addEventListener("click",()=>{
 
 /* ---- 关联小程序 ---- */
 function renderAppRows(){
-  $("appRows").innerHTML = miniApps.map((a,i)=>`<tr>
-    <td><span class="plogo">${a.name[0]}</span></td>
-    <td style="font-weight:600">${a.name}</td>
-    <td class="mono" style="color:var(--sub)">${a.appid}</td>
-    <td><span class="stag on">展示中</span></td>
-    <td><button class="abtn-danger" data-delapp="${i}">删除</button></td></tr>`).join("");
+  $("appRows").innerHTML = miniApps.map((a,i)=>`
+    <div class="adm-card"><div class="ck-top">
+      <div class="pcell"><span class="plogo">${a.name[0]}</span><div><div class="pn">${a.name}</div><div class="ps">${a.appid} · 展示中</div></div></div>
+      <button class="abtn-danger" data-delapp="${i}">删除</button>
+    </div></div>`).join("");
   $("appRows").querySelectorAll("[data-delapp]").forEach(b=>b.addEventListener("click",()=>{
     const name=miniApps[+b.dataset.delapp].name;
     miniApps.splice(+b.dataset.delapp,1);
@@ -966,13 +947,17 @@ $("naBtn").addEventListener("click",()=>{
 
 /* ---- 价格设置 ---- */
 function renderPriceRows(){
-  $("priceRows").innerHTML = products.map((p,i)=>`<tr>
-    <td><div class="pcell">${p.img?`<img src="${p.img}" alt="">`:""}<div><div class="pn">${p.brand} · ${p.name}</div><div class="ps">NO. ${p.no} · ${p.spec}</div></div></div></td>
-    <td><input class="price-input" data-p="${i}" data-lv="0" value="${p.prices[0]}" ${p.off?"disabled":""}></td>
-    <td><input class="price-input" data-p="${i}" data-lv="1" value="${p.prices[1]}" ${p.off?"disabled":""}></td>
-    <td><input class="price-input" data-p="${i}" data-lv="2" value="${p.prices[2]}" ${p.off?"disabled":""}></td>
-    <td><span class="stag ${p.off?"off":"on"}">${p.off?"已下架":"在售"}</span></td>
-    <td><button class="abtn-ghost" data-toggle="${i}">${p.off?"重新上架":"下架"}</button></td></tr>`).join("");
+  $("priceRows").innerHTML = products.map((p,i)=>`
+    <div class="adm-card">
+      <div class="ck-top" style="margin-bottom:6px">
+        <div class="pcell">${p.img?`<img src="${p.img}" alt="">`:""}<div><div class="pn">${p.brand} · ${p.name}</div><div class="ps">NO. ${p.no} · ${p.spec} · ${p.unit}</div></div></div>
+        <span class="stag ${p.off?"off":"on"}">${p.off?"已下架":"在售"}</span>
+      </div>
+      <div class="prow"><label>普通会员价</label><input class="price-input" data-p="${i}" data-lv="0" value="${p.prices[0]}" ${p.off?"disabled":""}></div>
+      <div class="prow"><label>高级会员价</label><input class="price-input" data-p="${i}" data-lv="1" value="${p.prices[1]}" ${p.off?"disabled":""}></div>
+      <div class="prow"><label>核心会员价</label><input class="price-input" data-p="${i}" data-lv="2" value="${p.prices[2]}" ${p.off?"disabled":""}></div>
+      <div class="ck-ops"><button class="abtn-ghost" data-toggle="${i}">${p.off?"重新上架":"下架"}</button></div>
+    </div>`).join("");
   $("priceRows").querySelectorAll("[data-toggle]").forEach(b=>b.addEventListener("click",()=>{
     const p=products[+b.dataset.toggle];
     p.off=!p.off;
@@ -994,9 +979,9 @@ function renderVoteAdmin(){
   $("voteAdminList").innerHTML = votes.map((v,i)=>`
     <div class="va-item">
       <div class="va-head"><b>${v.title}</b>
-        <div style="display:flex;gap:8px;align-items:center">
+        <div class="va-ops">
           <span class="stag ${v.doing?"unused":"used"}">${v.doing?"进行中":"已结束"}</span>
-          ${v.doing?`<button class="abtn-ghost" data-close="${i}">提前截止</button>`:""}
+          ${v.doing?`<button class="abtn-ghost" data-close="${i}">截止</button>`:""}
         </div>
       </div>
       <div class="va-opts">${v.options.map((o,j)=>`
@@ -1038,7 +1023,7 @@ document.querySelectorAll(".copy-btn").forEach(b=>b.addEventListener("click",()=
 }));
 $("resetBtn").addEventListener("click",()=>{
   snapshot();
-  state={member:null,voted:{},selOpt:{},tab:"home",pushed:null};
+  state={member:null,voted:{},selOpt:{},tab:"home"};
   syncAll(); renderVotes(); go("home"); toast("已重置为游客身份");
 });
 
